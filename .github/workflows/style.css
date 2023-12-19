@@ -1,0 +1,24 @@
+body {
+    text-align: center;
+}
+#basketball-header {
+    display: flex;
+    justify-content: center;
+    background-image: linear-gradient(to bottom right, yellow, orange);
+    opacity: .8;
+    height: 7rem;
+  }
+#basketball-header img {
+    height: 8rem;
+    width: auto;
+  }
+.container {
+    display: block;
+    text-align: center;
+    max-width: 500px;
+    margin: 0 auto;
+    border: 1px solid gray;
+    border-radius: 5px;
+    background-image: url("https://images.fineartamerica.com/images/artworkimages/mediumlarge/3/basketball-pattern-college-mascot-designs.jpg");
+    background-size:contain
+}
