@@ -22,3 +22,20 @@ body {
     background-image: url("https://images.fineartamerica.com/images/artworkimages/mediumlarge/3/basketball-pattern-college-mascot-designs.jpg");
     background-size:contain
 }
+.card {
+  text-align: center;
+  background-image: url("https://images.fineartamerica.com/images/artworkimages/mediumlarge/3/basketball-pattern-college-mascot-designs.jpg");
+  background-size:contain;
+  width: 300px;
+  height: 200px;
+  perspective: 1000px;
+  display: inline-grid;
+  overflow:hidden;
+  border-radius: 8px;
+
+}
+.logo{
+  justify-self: center;
+  height: 8rem;
+  width: auto;
+}s
