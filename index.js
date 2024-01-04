@@ -1,68 +1,98 @@
-const teamCreator = document.getElementsByClassName('add-team')[0]
-const teamDataUrl = "http://localhost:3000/data";
-const currentTeams = document.getElementById('current-teams')
+// document.addEventListener('DOMContentLoaded', () => {
+//     const searchButton= document.getElementById('searchButton')
+//     searchButton.addEventListener('click', createTeamCard)
+// })
+
+// const teamSearch = document.getElementsByClassName('search-team')[0]
+// const teamDataUrl = "http://localhost:3000/data"
+// const currentTeams = document.getElementById('current-teams')
+// const searchTeam = searchInput.value.toLowerCase()
 
 
-function createTeamCard(team) {
-    const card = document.createElement('div')
-    card.className = 'card'
-    currentTeams.appendChild(card)
+//     function searchTeams() {
+//         fetch(teamDataUrl)
 
-    const name = document.createElement('h3')
-    name.textContent = `${team.name}`
-    const logo = document.createElement('img')
-    logo.className = 'logo'
-    logo.src = team.logo
-    card.append(name, logo)
-    console.log(team)
+//       .then((res) => res.json())
+//       .then((teams => { 
+//             currentTeams.innerHTML = ''
+//             teams.forEach(team => {
+//                 if (team.name.toLowerCase().includes(searchTeam)) {
+//                 createTeamCard(searchTeam)
+//                 }
+//             }
+//         })
+//     }
 
-}
+//       .catch((error) => {
+//         console.error(error)
+//       })
+  
 
-teamCreator.addEventListener('submit', handleSubmit)
-
-function handleSubmit(e) {
-    
-    e.preventDefault()
-    
-    let newTeam = {
-        city: e.target.city.value,
-        name: e.target.name.value,
-        logo: e.target.elements.image.value,
-    };
-    function postTeam(newTeam){
-        fetch(teamDataUrl, {
-            method: 'POST',
-            headers: {
-                'Content-Type':'application/json'
-            },
-            body: JSON.stringify(newTeam)
-        })
-        .then (res => res.json())
-        .then(data => {
-            console.log(data)
-        })
-        .catch(error => {
-            console.error(error)
-        })
-        
-    }
-    teamCreator.reset()
-    postTeam(newTeam)
-    createTeamCard(newTeam)
-}
-
-
-
-
-
+//       function createTeamCard(team) {
+//         fetch(teamDataUrl)
+//           .then((res) => res.json())
+//           .then((teams) => {
+//             currentTeams.innerHTML = ''
+//             teams.forEach((team) => {
+//               if (team.name.toLowerCase().includes(searchTeam)) {
+//                 const card = document.createElement('div')
+//                 card.className = 'card'
+//                 currentTeams.appendChild(card)
+//                 const name = document.createElement('h3')
+//                 name.textContent = `${team.name}`
+//                 const logo = document.createElement('img')
+//                 logo.className = 'logo'
+//                 logo.src = team.logo
+//                 const city = document.createElement('h3')
+//                 city.textContent = `${team.city}`
+//                 currentTeams.appendChild(card)
+//               }
+//             })
+//           })
+//           .catch((error) => {
+//             console.error(error)
+//           })
+//       }
 
 document.addEventListener('DOMContentLoaded', () => {
+    const searchButton = document.getElementById('searchButton');
+    searchButton.addEventListener('click', searchTeams);
+  });
+  
+  const teamSearch = document.getElementsByClassName('search-team')[0];
+  const teamDataUrl = "http://localhost:3000/data";
+  const currentTeams = document.getElementById('current-teams');
+  const teamInput = document.getElementById('searchInput')
+  
+  function searchTeams() {
     fetch(teamDataUrl)
-        .then(res => res.json())
-        .then(data => {
-            const teams = data
-            teams.forEach(team =>{
-                createTeamCard(team)
-            })
-        })
-})
+      .then((res) => res.json())
+      .then((teams) => {
+        currentTeams.innerHTML = '';
+        const foundTeams = teams.filter((team) => team.name.toLowerCase().includes(teamInput.value.toLowerCase()));
+        foundTeams.forEach((team) => {
+          createTeamCard(team);
+        });
+      })
+      .catch((error) => {
+        console.error(error);
+      });
+  }
+  
+  function createTeamCard(team) {
+    const card = document.createElement('div');
+    card.className = 'card';
+    currentTeams.appendChild(card);
+  
+    const name = document.createElement('h3');
+    name.textContent = team.name;
+  
+    const logo = document.createElement('img');
+    logo.className = 'logo';
+    logo.src = team.logo;
+  
+    const city = document.createElement('h3');
+    city.textContent = team.city;
+  
+    card.append(name, logo, city);
+  }
